@@ -1,0 +1,7 @@
+{
+    "hello": "olá",
+    "dynamic": "transloco {{value}}",
+
+
+    "Height": "altura"
+}

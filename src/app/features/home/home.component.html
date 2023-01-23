@@ -1,0 +1,122 @@
+<poke-search></poke-search>
+
+<div class="home-container">
+    <div class="pokemon-list">
+
+        <div class="pokemon-list-sort-by">
+            <select class="form-select">
+                <option select>numb ascending</option>
+                <option value="1">numb descend</option>
+                <option value="2">name ascending</option>
+                <option value="3">name descend</option>
+            </select>
+        </div>
+
+        <div class="pokemon-list-filter">
+            <div class="pokemon-list-filter-box">
+                <img src="./assets/icons/eye.png">
+                <select class="form-select">
+                    <option selected>Type</option>
+                </select>
+            </div>
+
+            <div class="pokemon-list-filter-box">
+                <img src="./assets/icons/eye.png">
+                <select class="form-select">
+                    <option selected>Type</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pokemon-list">
+
+            <div class="pokemon-card" *ngFor="let pokemon of pokemonList">
+                <img [src]="pokemon.status?.sprites.other.dream_world.front_default" alt="">
+                <!-- <img src="https://projectpokemon.org/images/normal-sprite/{{pokemon.name}}.gif" alt=""> -->
+                <div class="id">Nº{{pokemon.status?.id}}</div>
+                <div class="name">{{pokemon.name}}</div>
+                <div class="type-container">
+                    <div class="type" *ngFor="let pokemonType of pokemon.status?.types">{{pokemonType.type.name}}</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="pokemon-info" *ngIf="pokemonSelected">
+        <div class="pokemon-info-container" [ngStyle]="{'position': pokemonInfoFixed ? 'sticky' : 'absolute'}">
+
+
+            <!-- <div class="gender">
+
+            </div> -->
+
+            <img [src]="pokemonSelected.status?.sprites.other.dream_world.front_default" alt="">
+            <div class="id">#{{pokemonSelected.status?.id}}</div>
+            <div class="name">{{pokemonSelected.name}}</div>
+            <div class="types-container">
+                <div class="type" *ngFor="let pokemonType of pokemonSelected.status?.types">{{pokemonType.type.name}}</div>
+            </div>
+
+            <div class="section-title">Pokedex Entry</div>
+
+            <div class="description">{{pokemonSelected.species?.description}}</div>
+
+            <div class="section-title">Abilities</div>
+
+            <div class="abilities-container">
+                <div class="ability" *ngFor="let pokemonAbility of pokemonSelected.status?.abilities">{{pokemonAbility.ability.name}}</div>
+            </div>
+
+            <div class="attributes-container">
+                <div>
+                    <div class="section-title">{{'Height' | transloco}}</div>
+                    <div class="attribute">{{pokemonSelected.status?.height}}</div>
+                </div>
+                <div>
+                    <div class="section-title">Weight</div>
+                    <div class="attribute">{{pokemonSelected.status?.weight}}</div>
+                </div>
+                <div>
+                    <div class="section-title">Weaknesses</div>
+                    <div class="attribute">a</div>
+                </div>
+                <div>
+                    <div class="section-title">Base exp</div>
+                    <div class="attribute">{{pokemonSelected.status?.base_experience}}</div>
+                </div>
+            </div>
+
+            <div class="section-title">Stats</div>
+
+            <div class="statistics-container">
+                <div class="statistic" *ngFor="let pokemonStat of pokemonSelected.status?.stats">
+                    <div class="statistic-title">{{PokemonStatisticLabels[pokemonStat.stat.name]}}</div>
+                    <div class="statistic-value">{{pokemonStat.base_stat}}</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">{{PokemonStatisticLabels['total']}}</div>
+                    <div class="statistic-value">500</div>
+                </div>
+            </div>
+
+            <!-- <div class="section-title">Evolution</div>
+
+            <div class="evolution-container">
+                <img src="">
+                <div></div>
+                <img src="">
+                <div></div>
+                <img src="">
+            </div>
+
+            <div class="change-pokemon">
+                <div class="preview"></div>
+                <div class="next"></div>
+            </div> -->
+
+
+        </div>
+    </div>
+</div>
+

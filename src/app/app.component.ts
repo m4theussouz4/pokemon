@@ -2,9 +2,13 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `<router-outlet></router-outlet>`,
+  styles: [
+    `
+      :host {
+        min-height: 100%;
+      }
+    `,
+  ],
 })
-export class AppComponent {
-  title = 'pokedex';
-}
+export class AppComponent {}
