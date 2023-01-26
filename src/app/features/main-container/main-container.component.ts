@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonService } from 'src/app/shared/services/pokemon/pokemon.service';
+import { AppFacade } from 'src/app/+state/app.facade';
 
 @Component({
   selector: 'app-main-container',
@@ -8,7 +8,9 @@ import { PokemonService } from 'src/app/shared/services/pokemon/pokemon.service'
 })
 export class MainContainerComponent implements OnInit {
 
-  constructor() {}
+  constructor(private appFacade: AppFacade) {
+    this.appFacade.loadPokemonList();
+  }
 
   ngOnInit(): void {}
 

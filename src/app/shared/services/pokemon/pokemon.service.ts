@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable, tap } from "rxjs";
+import { map, Observable } from "rxjs";
 import { PokemonList, PokemonStatus } from "../../models/pokemon.model";
 
 @Injectable({
@@ -10,22 +10,8 @@ export class PokemonService {
 
     constructor(private http: HttpClient) {}
 
-    getAll(): Observable<PokemonList> {
-        return this.http.get<PokemonList>('pokemon?limit=100').pipe(
-            tap(data => {
-                data?.results.map(pokemonData => {
-
-                    this.getById(pokemonData.name)
-                    .subscribe(pokemonInfo => pokemonData.status = pokemonInfo);
-
-                    this.getSpecies(pokemonData.name)
-                    .subscribe(pokemonDescription => pokemonData.species = pokemonDescription)
-
-                    // this.getEvolutionChain(pokemonData.species.evolution_chain_url)
-                    // .subscribe(pokemonEvolution => pokemonData.evolution = pokemonEvolution)
-                })
-            })
-        )
+    getAll(offset: number, limit?: number): Observable<PokemonList> {
+        return this.http.get<PokemonList>(`pokemon?offset=${offset}&limit=${limit ? limit : 100}`)
     };
 
     getById(id: number | string): Observable<PokemonStatus> {

@@ -1,34 +1,44 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import { PokemonInfo } from '../shared/models/pokemon.model';
 
 import * as AppActions from './app.actions';
 
 export const APP_FEATURE_KEY = 'app';
 
 export interface AppState {
-  selectedId?: string | number; // which App record has been selected
-  loaded: boolean; // has the App list been loaded
-  error?: string | null; // last known error (if any)
-  gameLibrary?: any;
-}
-
-export interface AppPartialState {
-  readonly [APP_FEATURE_KEY]: AppState;
+  loaded: boolean;
+  error?: string | null;
+  pokemonList: PokemonInfo[];
+  pokemonSelected: PokemonInfo;
+  hasNextPage: boolean;
+  currentOffset: number
 }
 
 export const initialState: AppState = {
-  // set initial required properties
   loaded: false,
+  pokemonList: [],
+  pokemonSelected: null,
+  hasNextPage: true,
+  currentOffset: 0,
 };
 
 export const appReducer = createReducer(
   initialState,
-  on(AppActions.loadUserLibrarySuccess, (state, { gameLibrary }) => ({ 
+  on(AppActions.loadPokemonListSuccess, (state, { pokemonList, hasNext, offset }) => ({ 
     ...state,
-    gameLibrary,
-    loaded: true
-  }))
-);
+    pokemonList: [...state.pokemonList, ...pokemonList],
+    hasNextPage: hasNext,
+    loaded: true,
+    currentOffset: offset
+  })),
 
-export function reducer(state: AppState | undefined, action: Action) {
-  return appReducer(state, action);
-}
+  on(AppActions.selectPokemon, (state, { pokemonInfo }) => ({ 
+    ...state,
+    pokemonSelected: pokemonInfo
+  })),
+
+  on(AppActions.setLoading, state => ({ 
+    ...state,
+    loaded: false
+  })),
+);

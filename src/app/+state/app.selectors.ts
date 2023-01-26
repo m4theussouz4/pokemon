@@ -1,10 +1,24 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { APP_FEATURE_KEY, AppState } from './app.reducer';
 
-// Lookup the 'App' feature state managed by NgRx
 export const getAppState = createFeatureSelector<AppState>(APP_FEATURE_KEY);
 
-export const getgameLibrary = createSelector(
+export const getPokemonList = createSelector(
     getAppState,
-    (state: AppState) => state.gameLibrary
+    (state: AppState) => state.pokemonList
+);
+
+export const getPokemonSelected = createSelector(
+    getAppState,
+    (state: AppState) => state.pokemonSelected
+);
+
+export const getHasNextPage = createSelector(
+    getAppState,
+    (state: AppState) => state.hasNextPage
+);
+
+export const getLoaded = createSelector(
+    getAppState,
+    (state: AppState) => state.loaded
 );

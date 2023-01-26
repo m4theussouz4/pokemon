@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,10 +7,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslocoRootModule } from './core/transloco/transloco-root.module';
-import { appReducer, APP_FEATURE_KEY, initialState as appInitialState, reducer } from './+state/app.reducer';
+import { appReducer, initialState as appInitialState } from './+state/app.reducer';
 import { AppEffects } from './+state/app.effects';
 import { AppFacade } from './+state/app.facade';
 import { ApiPrefixInterceptor } from './core/interceptor/api-prefix.interceptor';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,6 @@ import { ApiPrefixInterceptor } from './core/interceptor/api-prefix.interceptor'
     AppRoutingModule,
     HttpClientModule,
     TranslocoRootModule,
-    StoreModule.forFeature(
-      APP_FEATURE_KEY, reducer
-    ),
     StoreModule.forRoot(
       { app: appReducer },
       {
@@ -36,6 +34,7 @@ import { ApiPrefixInterceptor } from './core/interceptor/api-prefix.interceptor'
       }
     ),
     EffectsModule.forRoot([AppEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
     AppFacade,

@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { ComponentsModule } from '../shared/components/components.module';
 import { TranslocoModule } from '@ngneat/transloco';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TranslocoModule } from '@ngneat/transloco';
     CommonModule,
     FeaturesRoutingModule,
     ComponentsModule,
-    TranslocoModule
+    TranslocoModule,
+    InfiniteScrollModule
   ],
   providers: [MainContainerComponent],
 })

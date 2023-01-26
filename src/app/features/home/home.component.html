@@ -3,14 +3,14 @@
 <div class="home-container">
     <div class="pokemon-list">
 
-        <div class="pokemon-list-sort-by">
+        <!-- <div class="pokemon-list-sort-by">
             <select class="form-select">
                 <option select>numb ascending</option>
                 <option value="1">numb descend</option>
                 <option value="2">name ascending</option>
                 <option value="3">name descend</option>
             </select>
-        </div>
+        </div> -->
 
         <div class="pokemon-list-filter">
             <div class="pokemon-list-filter-box">
@@ -28,11 +28,18 @@
             </div>
         </div>
 
-        <div class="pokemon-list">
+        <div 
+            class="pokemon-list-container"
+            infinite-scroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="1000"
+            [scrollWindow]="true"
+            [infiniteScrollDisabled]="!(hasNext$ | async) || !(loaded$ | async)"
+            (scrolled)="onScroll()"
+        >
 
-            <div class="pokemon-card" *ngFor="let pokemon of pokemonList">
+            <div class="pokemon-card" *ngFor="let pokemon of pokemonList" (click)="selectPokemon(pokemon)">
                 <img [src]="pokemon.status?.sprites.other.dream_world.front_default" alt="">
-                <!-- <img src="https://projectpokemon.org/images/normal-sprite/{{pokemon.name}}.gif" alt=""> -->
                 <div class="id">Nº{{pokemon.status?.id}}</div>
                 <div class="name">{{pokemon.name}}</div>
                 <div class="type-container">

@@ -26,14 +26,14 @@ export interface PokemonList {
 }
 
 export interface PokemonInfo {
-    species: {
+    species?: {
         description: string,
         evolution_chain_url: string,
     },
     name: string,
     url: string,
     status?: PokemonStatus,
-    evolution: {
+    evolution?: {
         preview: {
             img: string,
             name: string,
@@ -50,6 +50,7 @@ export interface PokemonInfo {
 export interface PokemonStatus {
     id: number,
     name: string,
+    url: string,
     base_experience: number,
     height: number,
     is_default: boolean,
