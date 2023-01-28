@@ -26,7 +26,7 @@ export class PokemonService {
         )
     };
 
-    getEvolutionChain(id: number | string): Observable<any> {
-        return this.http.get<any>(`evolution-chain/${id}`)
-    }
+    // getEvolutionChain(id: number | string): Observable<any> {
+    //     return this.http.get<any>(`evolution-chain/${id}`)
+    // }
 }

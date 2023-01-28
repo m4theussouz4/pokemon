@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppFacade } from 'src/app/+state/app.facade';
-import { PokemonInfo, PokemonStatisticLabels } from 'src/app/shared/models/pokemon.model';
+import { PokemonInfo, PokemonStatisticColors, PokemonStatisticLabels, PokemonTypesColors } from 'src/app/shared/models/pokemon.model';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,9 @@ import { PokemonInfo, PokemonStatisticLabels } from 'src/app/shared/models/pokem
 })
 export class HomeComponent {
 
-  public readonly PokemonStatisticLabels = PokemonStatisticLabels;
+  public readonly pokemonStatisticLabels = PokemonStatisticLabels;
+  public readonly pokemonStatisticColors = PokemonStatisticColors;
+  public readonly pokemonTypesColors = PokemonTypesColors;
   public readonly hasNext$: Observable<boolean>;
   public readonly loaded$: Observable<boolean>;
   public pokemonList: PokemonInfo[] = [];

@@ -1,0 +1,14 @@
+<div class="card-container" (click)="selectCard(cardData)">
+    <img [src]="cardData.status?.sprites.other.dream_world.front_default" alt="">
+    <div class="id">Nº{{cardData.status?.id}}</div>
+    <div class="name">{{cardData.name}}</div>
+    <div class="type-container">
+        <div
+            class="type"
+            *ngFor="let cardType of cardData.status?.types"
+            [ngStyle]="{'background-color': pokemonTypesColors[cardType.type.name]}"
+        >
+            {{cardType.type.name}}
+        </div>
+    </div>
+</div>

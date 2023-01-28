@@ -37,15 +37,12 @@
             [infiniteScrollDisabled]="!(hasNext$ | async) || !(loaded$ | async)"
             (scrolled)="onScroll()"
         >
-
-            <div class="pokemon-card" *ngFor="let pokemon of pokemonList" (click)="selectPokemon(pokemon)">
-                <img [src]="pokemon.status?.sprites.other.dream_world.front_default" alt="">
-                <div class="id">Nº{{pokemon.status?.id}}</div>
-                <div class="name">{{pokemon.name}}</div>
-                <div class="type-container">
-                    <div class="type" *ngFor="let pokemonType of pokemon.status?.types">{{pokemonType.type.name}}</div>
-                </div>
-            </div>
+            <poke-card
+                *ngFor="let pokemon of pokemonList"
+                [cardData]="pokemon"
+                (selectedCard)="selectPokemon($event)"
+            >
+            </poke-card>
 
         </div>
 
@@ -62,7 +59,13 @@
             <div class="id">#{{pokemonSelected.status?.id}}</div>
             <div class="name">{{pokemonSelected.name}}</div>
             <div class="types-container">
-                <div class="type" *ngFor="let pokemonType of pokemonSelected.status?.types">{{pokemonType.type.name}}</div>
+                <div 
+                    class="type"
+                    *ngFor="let pokemonType of pokemonSelected.status?.types"
+                    [ngStyle]="{'background-color': pokemonTypesColors[pokemonType.type.name]}"
+                >
+                {{pokemonType.type.name}}
+                </div>
             </div>
 
             <div class="section-title">Pokedex Entry</div>
@@ -98,11 +101,11 @@
 
             <div class="statistics-container">
                 <div class="statistic" *ngFor="let pokemonStat of pokemonSelected.status?.stats">
-                    <div class="statistic-title">{{PokemonStatisticLabels[pokemonStat.stat.name]}}</div>
+                    <div class="statistic-title" [ngStyle]="{'background-color': pokemonStatisticColors[pokemonStat.stat.name]}">{{pokemonStatisticLabels[pokemonStat.stat.name]}}</div>
                     <div class="statistic-value">{{pokemonStat.base_stat}}</div>
                 </div>
                 <div class="statistic">
-                    <div class="statistic-title">{{PokemonStatisticLabels['total']}}</div>
+                    <div class="statistic-title">{{pokemonStatisticLabels['total']}}</div>
                     <div class="statistic-value">500</div>
                 </div>
             </div>

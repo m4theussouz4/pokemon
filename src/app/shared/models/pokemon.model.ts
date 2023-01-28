@@ -18,6 +18,58 @@ export const PokemonStatisticLabels = {
     [PokemonStatistic.TOT]: 'TOT',
 }
 
+export const PokemonStatisticColors = {
+    [PokemonStatistic.HP]: 'var(--color-hp)',
+    [PokemonStatistic.ATK]: 'var(--color-atk)',
+    [PokemonStatistic.DEF]: 'var(--color-def)',
+    [PokemonStatistic.SpA]: 'var(--color-spa)',
+    [PokemonStatistic.SpD]: 'var(--color-spd)',
+    [PokemonStatistic.SPD]: 'var(--color-speed)',
+    [PokemonStatistic.TOT]: 'var(--color-tot)',
+}
+
+export enum PokemonTypes {
+    normal = 'normal',
+    fighting = 'fighting',
+    flying = 'flying',
+    poison = 'poison',
+    ground = 'ground',
+    rock = 'rock',
+    bug = 'bug',
+    ghost = 'ghost',
+    steel = 'steel',
+    fire = 'fire',
+    water = 'water',
+    grass = 'grass',
+    electric = 'electric',
+    psychic = 'psychic',
+    ice = 'ice',
+    dragon = 'dragon',
+    dark = 'dark',
+    fairy = 'fairy',
+};
+
+export const PokemonTypesColors = {
+    [PokemonTypes.normal]: 'var(--color-normal)',
+    [PokemonTypes.fighting]: 'var(--color-fighting)',
+    [PokemonTypes.flying]: 'var(--color-flying)',
+    [PokemonTypes.poison]: 'var(--color-poison)',
+    [PokemonTypes.ground]: 'var(--color-ground)',
+    [PokemonTypes.rock]: 'var(--color-rock)',
+    [PokemonTypes.bug]: 'var(--color-bug)',
+    [PokemonTypes.ghost]: 'var(--color-ghost)',
+    [PokemonTypes.steel]: 'var(--color-steel)',
+    [PokemonTypes.fire]: 'var(--color-fire)',
+    [PokemonTypes.water]: 'var(--color-water)',
+    [PokemonTypes.grass]: 'var(--color-grass)',
+    [PokemonTypes.electric]: 'var(--color-electric)',
+    [PokemonTypes.psychic]: 'var(--color-psychic)',
+    [PokemonTypes.ice]: 'var(--color-ice)',
+    [PokemonTypes.dragon]: 'var(--color-dragon)',
+    [PokemonTypes.dark]: 'var(--color-dark)',
+    [PokemonTypes.fairy]: 'var(--color-fairy)',
+}
+
 export interface PokemonList {
     count: number,
     next: string,

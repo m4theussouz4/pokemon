@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MainContainerComponent } from './main-container/main-container.component';
-import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {
@@ -12,10 +11,6 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-      },
-      {
-        path: 'menu',
-        component: MenuComponent,
       },
       {
         path: '**',
