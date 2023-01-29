@@ -11,7 +11,8 @@ export interface AppState {
   pokemonList: PokemonInfo[];
   pokemonSelected: PokemonInfo;
   hasNextPage: boolean;
-  currentOffset: number
+  currentOffset: number;
+  pokemonWeaknesses: { [key: string]: string[] };
 }
 
 export const initialState: AppState = {
@@ -20,6 +21,7 @@ export const initialState: AppState = {
   pokemonSelected: null,
   hasNextPage: true,
   currentOffset: 0,
+  pokemonWeaknesses: {}
 };
 
 export const appReducer = createReducer(
@@ -35,6 +37,11 @@ export const appReducer = createReducer(
   on(AppActions.selectPokemon, (state, { pokemonInfo }) => ({ 
     ...state,
     pokemonSelected: pokemonInfo
+  })),
+
+  on(AppActions.loadPokemonWeaknessesSucess, (state, { pokemonWeaknesses }) => ({ 
+    ...state,
+    pokemonWeaknesses: pokemonWeaknesses
   })),
 
   on(AppActions.setLoading, state => ({ 

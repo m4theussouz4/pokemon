@@ -9,6 +9,7 @@ import * as AppSelectors from './app.selectors';
 export class AppFacade {
   pokemonList$ = this.store.pipe(select(AppSelectors.getPokemonList));
   pokemonSelected$ = this.store.pipe(select(AppSelectors.getPokemonSelected));
+  pokemonWeaknesses$ = this.store.pipe(select(AppSelectors.getpokemonWeaknesses));
   hasNextPage$ = this.store.pipe(select(AppSelectors.getHasNextPage));
   loaded$ = this.store.pipe(select(AppSelectors.getLoaded));
 

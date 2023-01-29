@@ -23,3 +23,12 @@ export const selectPokemon = createAction(
   '[App] Select Pokemon',
   props<{ pokemonInfo: PokemonInfo }>()
 );
+
+export const loadPokemonWeaknesses = createAction(
+  '[App] Load Pokemon Weaknesses'
+);
+
+export const loadPokemonWeaknessesSucess = createAction(
+  '[App] Load Pokemon Weaknesses Sucess',
+  props<{ pokemonWeaknesses: { [key: string]: string[] } }>()
+);

@@ -28,10 +28,20 @@ export class PokemonService {
                     stats: data.stats,
                     types: data.types
                 }
-                )
-            )
+            ))
         )
     };
+
+    getWeaknesses(id: number | string): Observable<any> {
+        return this.http.get<any>(`type/${id}`).pipe(
+            map(data => (
+                {
+                    name: data.name,
+                    weaknesses: data.damage_relations.double_damage_from.map(weakness => weakness.name)
+                }
+            ))
+        )
+    }
 
     // getSpecies(id: number | string): Observable<any> {
     //     return this.http.get<any>(`pokemon-species/${id}`).pipe(

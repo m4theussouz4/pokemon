@@ -16,6 +16,7 @@ export class HomeComponent {
 
   public readonly hasNext$: Observable<boolean>;
   public readonly loaded$: Observable<boolean>;
+  public readonly pokemonWeaknesses$: Observable<{ [key: string]: string[] }>;
 
   public pokemonList: PokemonInfo[] = [];
   public pokemonSelected: PokemonInfo;
@@ -42,6 +43,7 @@ export class HomeComponent {
       }, 0);
     });
     
+    this.pokemonWeaknesses$ = this.appFacade.pokemonWeaknesses$;
     this.hasNext$ = this.appFacade.hasNextPage$;
     this.loaded$ = this.appFacade.loaded$;
   }

@@ -55,7 +55,7 @@
 
             </div> -->
 
-            <img [src]="pokemonSelected.img" alt="">
+            <img class="img" [src]="pokemonSelected.img" alt="">
             <div class="id">#{{pokemonSelected.id}}</div>
             <div class="name">{{pokemonSelected.name}}</div>
             <div class="types-container">
@@ -89,7 +89,14 @@
                 </div>
                 <div>
                     <div class="section-title">Weaknesses</div>
-                    <div class="attribute">a</div>
+                    <div class="attribute">
+                        <img
+                            class="attribute-img"
+                            *ngFor="let pokemonWeakness of (pokemonWeaknesses$ | async)[pokemonSelected.types[0].type.name]"
+                            src="./assets/icons/{{pokemonWeakness}}.svg"
+                            [ngStyle]="{'background-color': pokemonTypesColors[pokemonWeakness]}"
+                        >
+                    </div>
                 </div>
                 <div>
                     <div class="section-title">Base exp</div>

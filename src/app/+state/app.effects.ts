@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, of, withLatestFrom } from 'rxjs';
+import { catchError, mergeMap, of, switchMap, withLatestFrom } from 'rxjs';
 import { PokemonService } from '../shared/services/pokemon/pokemon.service';
 import * as AppActions from './app.actions';
 import * as AppSelectors from './app.selectors'
@@ -9,16 +9,16 @@ import { AppState } from './app.reducer';
 
 @Injectable()
 export class AppEffects {
-
   loadPokemonList$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AppActions.loadPokemonList),
       withLatestFrom(this.store.select(AppSelectors.getAppState)),
       mergeMap(([_, pokemonState]) => {
         this.store.dispatch(AppActions.setLoading());
+        this.store.dispatch(AppActions.loadPokemonWeaknesses());
 
         return this.pokemonService.getAll(pokemonState.currentOffset).pipe(
-          map(async data => {
+          switchMap(async data => {
             
             let pokemonListClone = [];
         
@@ -30,11 +30,8 @@ export class AppEffects {
                 })
               })
             }
-
             
-            this.store.dispatch(
-              AppActions.loadPokemonListSuccess({ pokemonList: pokemonListClone, hasNext: data.next !== null, offset: pokemonState.currentOffset + 100 })
-            );
+            this.store.dispatch(AppActions.loadPokemonListSuccess({ pokemonList: pokemonListClone, hasNext: data.next !== null, offset: pokemonState.currentOffset + 100 }));
 
           }),
           catchError(error => of(AppActions.loadPokemonListError(error)))
@@ -42,6 +39,29 @@ export class AppEffects {
       })
     ),
     { dispatch: false }
+  );
+
+  loadPokemonWeaknesses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.loadPokemonWeaknesses),
+      mergeMap(async () => {
+
+        let pokemonWeaknessesList = []
+
+        for (let index = 1; index <= 18; index++) {
+          await new Promise<void> ((resolve) => { 
+            this.pokemonService.getWeaknesses(index).subscribe(pokemonWeaknesses => {
+              pokemonWeaknessesList.push({ [pokemonWeaknesses.name]: pokemonWeaknesses.weaknesses });
+              resolve();
+            })
+          })
+        }
+
+        var pokemonWeaknessesListClone = Object.assign({}, ...pokemonWeaknessesList );
+        
+        return AppActions.loadPokemonWeaknessesSucess({ pokemonWeaknesses: pokemonWeaknessesListClone });
+      }),
+    )
   );
 
   constructor(

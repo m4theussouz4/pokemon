@@ -8,6 +8,11 @@ export const getPokemonList = createSelector(
     (state: AppState) => state.pokemonList
 );
 
+export const getpokemonWeaknesses = createSelector(
+    getAppState,
+    (state: AppState) => state.pokemonWeaknesses
+);
+
 export const getPokemonSelected = createSelector(
     getAppState,
     (state: AppState) => state.pokemonSelected
