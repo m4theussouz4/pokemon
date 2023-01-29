@@ -55,37 +55,37 @@
 
             </div> -->
 
-            <img [src]="pokemonSelected.status?.sprites.other.dream_world.front_default" alt="">
-            <div class="id">#{{pokemonSelected.status?.id}}</div>
+            <img [src]="pokemonSelected.img" alt="">
+            <div class="id">#{{pokemonSelected.id}}</div>
             <div class="name">{{pokemonSelected.name}}</div>
             <div class="types-container">
                 <div 
                     class="type"
-                    *ngFor="let pokemonType of pokemonSelected.status?.types"
+                    *ngFor="let pokemonType of pokemonSelected.types"
                     [ngStyle]="{'background-color': pokemonTypesColors[pokemonType.type.name]}"
                 >
                 {{pokemonType.type.name}}
                 </div>
             </div>
 
-            <div class="section-title">Pokedex Entry</div>
+            <!-- <div class="section-title">Pokedex Entry</div>
 
-            <div class="description">{{pokemonSelected.species?.description}}</div>
+            <div class="description">{{pokemonSelected.species?.description}}</div> -->
 
             <div class="section-title">Abilities</div>
 
             <div class="abilities-container">
-                <div class="ability" *ngFor="let pokemonAbility of pokemonSelected.status?.abilities">{{pokemonAbility.ability.name}}</div>
+                <div class="ability" *ngFor="let pokemonAbility of pokemonSelected.abilities">{{pokemonAbility.ability.name}}</div>
             </div>
 
             <div class="attributes-container">
                 <div>
                     <div class="section-title">{{'Height' | transloco}}</div>
-                    <div class="attribute">{{pokemonSelected.status?.height}}</div>
+                    <div class="attribute">{{pokemonSelected.height}}</div>
                 </div>
                 <div>
                     <div class="section-title">Weight</div>
-                    <div class="attribute">{{pokemonSelected.status?.weight}}</div>
+                    <div class="attribute">{{pokemonSelected.weight}}</div>
                 </div>
                 <div>
                     <div class="section-title">Weaknesses</div>
@@ -93,20 +93,20 @@
                 </div>
                 <div>
                     <div class="section-title">Base exp</div>
-                    <div class="attribute">{{pokemonSelected.status?.base_experience}}</div>
+                    <div class="attribute">{{pokemonSelected.base_experience}}</div>
                 </div>
             </div>
 
             <div class="section-title">Stats</div>
 
             <div class="statistics-container">
-                <div class="statistic" *ngFor="let pokemonStat of pokemonSelected.status?.stats">
+                <div class="statistic" *ngFor="let pokemonStat of pokemonSelected.stats">
                     <div class="statistic-title" [ngStyle]="{'background-color': pokemonStatisticColors[pokemonStat.stat.name]}">{{pokemonStatisticLabels[pokemonStat.stat.name]}}</div>
                     <div class="statistic-value">{{pokemonStat.base_stat}}</div>
                 </div>
                 <div class="statistic">
                     <div class="statistic-title">{{pokemonStatisticLabels['total']}}</div>
-                    <div class="statistic-value">500</div>
+                    <div class="statistic-value">{{totalStats}}</div>
                 </div>
             </div>
 

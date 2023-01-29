@@ -78,36 +78,13 @@ export interface PokemonList {
 }
 
 export interface PokemonInfo {
-    species?: {
-        description: string,
-        evolution_chain_url: string,
-    },
-    name: string,
-    url: string,
-    status?: PokemonStatus,
-    evolution?: {
-        preview: {
-            img: string,
-            name: string,
-            url: string,
-        }
-        next: {
-            img: string,
-            name: string,
-            url: string,
-        }
-    }
-}
-
-export interface PokemonStatus {
     id: number,
     name: string,
-    url: string,
+    url?: string,
     base_experience: number,
     height: number,
-    is_default: boolean,
-    order: number,
     weight: number,
+    img: string,
     abilities: {
         is_hidden: boolean,
         slot: number,
@@ -124,14 +101,6 @@ export interface PokemonStatus {
             url: string,
         },
     }[],
-    sprites: {
-        other: {
-            dream_world: {
-                front_default: string,
-                front_female: string,
-            }
-        }
-    },
     types: {
         slot: number,
         type: {

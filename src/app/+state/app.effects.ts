@@ -25,7 +25,7 @@ export class AppEffects {
             for (const pokemon of data.results) {
               await new Promise<void> ((resolve) => { 
                 this.pokemonService.getById(pokemon.name).subscribe(pokemonInfo => {
-                  pokemonListClone.push({...pokemon, status: pokemonInfo});
+                  pokemonListClone.push({...pokemon, ...pokemonInfo});
                   resolve();
                 })
               })

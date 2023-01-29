@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { PokemonInfo } from '../shared/models/pokemon.model';
 
 import * as AppActions from './app.actions';
 import * as AppSelectors from './app.selectors';
@@ -17,7 +18,7 @@ export class AppFacade {
     this.store.dispatch(AppActions.loadPokemonList());
   }
 
-  selectPokemon(pokemon) {
+  selectPokemon(pokemon: PokemonInfo) {
     this.store.dispatch(AppActions.selectPokemon({pokemonInfo: pokemon}));
   }
 }

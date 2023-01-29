@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { PokemonList, PokemonStatus } from "../../models/pokemon.model";
+import { PokemonList, PokemonInfo } from "../../models/pokemon.model";
 
 @Injectable({
     providedIn: 'root',
@@ -14,17 +14,36 @@ export class PokemonService {
         return this.http.get<PokemonList>(`pokemon?offset=${offset}&limit=${limit ? limit : 100}`)
     };
 
-    getById(id: number | string): Observable<PokemonStatus> {
-        return this.http.get<PokemonStatus>(`pokemon/${id}`)
-    };
-
-    getSpecies(id: number | string): Observable<any> {
-        return this.http.get<any>(`pokemon-species/${id}`).pipe(
-            map(data => {
-                return {description: data.flavor_text_entries[0].flavor_text, evolution_chain_url: data.evolution_chain.url}
-            })
+    getById(id: number | string): Observable<PokemonInfo> {
+        return this.http.get<any>(`pokemon/${id}`).pipe(
+            map(data => (
+                {
+                    abilities: data.abilities,
+                    base_experience: data.base_experience,
+                    height: data.height,
+                    weight: data.weight,
+                    id: data.id,
+                    name: data.name,
+                    img: data.sprites.other.dream_world.front_default,
+                    stats: data.stats,
+                    types: data.types
+                }
+                )
+            )
         )
     };
+
+    // getSpecies(id: number | string): Observable<any> {
+    //     return this.http.get<any>(`pokemon-species/${id}`).pipe(
+    //         map(data => (
+    //             {
+    //                 description: data.flavor_text_entries[0].flavor_text,
+    //                 evolutionChainUrl: data.evolution_chain.url
+    //             }
+    //         )
+    //         )
+    //     )
+    // };
 
     // getEvolutionChain(id: number | string): Observable<any> {
     //     return this.http.get<any>(`evolution-chain/${id}`)
