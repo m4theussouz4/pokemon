@@ -32,3 +32,18 @@ export const loadPokemonWeaknessesSucess = createAction(
   '[App] Load Pokemon Weaknesses Sucess',
   props<{ pokemonWeaknesses: { [key: string]: string[] } }>()
 );
+
+export const searchPokemon = createAction(
+  '[App] Search Pokemon',
+  props<{ search: string }>()
+);
+
+export const searchPokemonSucess = createAction(
+  '[App] Search Pokemon Sucess',
+  props<{ pokemonList: PokemonInfo }>()
+);
+
+export const searchPokemonError = createAction(
+  '[App] Search Pokemon Error',
+  props<{ error: any }>()
+);

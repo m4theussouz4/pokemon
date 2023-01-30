@@ -1,4 +1,4 @@
 <div class="search-box">
-    <input type="text" placeholder="Search your Pokemon!">
-    <button class="btn-search"><img src="./assets/icons/pokeball.png" alt=""></button>
+    <input type="text" placeholder="Search your Pokemon!" [formControl]="search" (keydown.enter)="searchPokemon()">
+    <button class="btn-search" (click)="searchPokemon()"><img src="./assets/icons/pokeball.png" alt=""></button>
 </div>

@@ -22,4 +22,8 @@ export class AppFacade {
   selectPokemon(pokemon: PokemonInfo) {
     this.store.dispatch(AppActions.selectPokemon({pokemonInfo: pokemon}));
   }
+
+  searchPokemon(searchPokemon: string) {
+    this.store.dispatch(AppActions.searchPokemon({search: searchPokemon}))
+  }
 }
