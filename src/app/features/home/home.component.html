@@ -1,4 +1,4 @@
-<poke-search></poke-search>
+<poke-search />
 
 <div class="home-container">
     <div class="pokemon-list">
@@ -41,99 +41,11 @@
                 *ngFor="let pokemon of pokemonList"
                 [cardData]="pokemon"
                 (selectedCard)="selectPokemon($event)"
-            >
-            </poke-card>
-
+            />
         </div>
 
     </div>
-    <div class="pokemon-info" *ngIf="pokemonSelected">
-        <div class="pokemon-info-container" [ngStyle]="{'position': pokemonInfoFixed ? 'sticky' : 'absolute'}">
-
-
-            <!-- <div class="gender">
-
-            </div> -->
-
-            <img class="img" [src]="pokemonSelected.img" alt="">
-            <div class="id">#{{pokemonSelected.id}}</div>
-            <div class="name">{{pokemonSelected.name}}</div>
-            <div class="types-container">
-                <div 
-                    class="type"
-                    *ngFor="let pokemonType of pokemonSelected.types"
-                    [ngStyle]="{'background-color': pokemonTypesColors[pokemonType.type.name]}"
-                >
-                {{pokemonType.type.name}}
-                </div>
-            </div>
-
-            <!-- <div class="section-title">Pokedex Entry</div>
-
-            <div class="description">{{pokemonSelected.species?.description}}</div> -->
-
-            <div class="section-title">Abilities</div>
-
-            <div class="abilities-container">
-                <div class="ability" *ngFor="let pokemonAbility of pokemonSelected.abilities">{{pokemonAbility.ability.name}}</div>
-            </div>
-
-            <div class="attributes-container">
-                <div>
-                    <div class="section-title">{{'Height' | transloco}}</div>
-                    <div class="attribute">{{pokemonSelected.height}}</div>
-                </div>
-                <div>
-                    <div class="section-title">Weight</div>
-                    <div class="attribute">{{pokemonSelected.weight}}</div>
-                </div>
-                <div>
-                    <div class="section-title">Weaknesses</div>
-                    <div class="attribute">
-                        <img
-                            class="attribute-img"
-                            *ngFor="let pokemonWeakness of (pokemonWeaknesses$ | async)[pokemonSelected.types[0].type.name]"
-                            src="./assets/icons/{{pokemonWeakness}}.svg"
-                            [ngStyle]="{'background-color': pokemonTypesColors[pokemonWeakness]}"
-                        >
-                    </div>
-                </div>
-                <div>
-                    <div class="section-title">Base exp</div>
-                    <div class="attribute">{{pokemonSelected.base_experience}}</div>
-                </div>
-            </div>
-
-            <div class="section-title">Stats</div>
-
-            <div class="statistics-container">
-                <div class="statistic" *ngFor="let pokemonStat of pokemonSelected.stats">
-                    <div class="statistic-title" [ngStyle]="{'background-color': pokemonStatisticColors[pokemonStat.stat.name]}">{{pokemonStatisticLabels[pokemonStat.stat.name]}}</div>
-                    <div class="statistic-value">{{pokemonStat.base_stat}}</div>
-                </div>
-                <div class="statistic">
-                    <div class="statistic-title">{{pokemonStatisticLabels['total']}}</div>
-                    <div class="statistic-value">{{totalStats}}</div>
-                </div>
-            </div>
-
-            <!-- <div class="section-title">Evolution</div>
-
-            <div class="evolution-container">
-                <img src="">
-                <div></div>
-                <img src="">
-                <div></div>
-                <img src="">
-            </div>
-
-            <div class="change-pokemon">
-                <div class="preview"></div>
-                <div class="next"></div>
-            </div> -->
-
-
-        </div>
-    </div>
+    <app-card-info [pokemonSelected]="pokemonSelected" [totalStats]="totalStats"/>
+    
 </div>
 
