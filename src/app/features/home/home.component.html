@@ -13,18 +13,15 @@
         </div> -->
 
         <div class="pokemon-list-filter">
-            <div class="pokemon-list-filter-box">
-                <img src="./assets/icons/eye.png">
-                <select class="form-select">
-                    <option selected>Type</option>
-                </select>
-            </div>
-
-            <div class="pokemon-list-filter-box">
-                <img src="./assets/icons/eye.png">
-                <select class="form-select">
-                    <option selected>Type</option>
-                </select>
+            <div>
+                <div class="pokemon-list-filter-title">Type</div>
+                <div class="pokemon-list-filter-box">
+                    <img src="./assets/icons/eye.png">
+                    <select class="form-select" (change)="filterByType($event)">
+                        <option default value="">all</option>
+                        <option *ngFor="let type of pokemonTypes" [value]="type">{{type}}</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -34,7 +31,7 @@
             [infiniteScrollDistance]="2"
             [infiniteScrollThrottle]="1000"
             [scrollWindow]="true"
-            [infiniteScrollDisabled]="!(hasNext$ | async) || !(loaded$ | async)"
+            [infiniteScrollDisabled]="!(hasNext$ | async) || !(loaded$ | async) || (isFilteredList$ | async)"
             (scrolled)="onScroll()"
         >
             <poke-card
@@ -43,6 +40,8 @@
                 (selectedCard)="selectPokemon($event)"
             />
         </div>
+
+        <app-loader *ngIf="!(loaded$ | async)" [isPageLoader]="(isFilteredList$ | async)"/>
 
     </div>
     <app-card-info [pokemonSelected]="pokemonSelected" [totalStats]="totalStats"/>

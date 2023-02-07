@@ -5,6 +5,8 @@ import { CardComponent } from './card/card.component';
 import { CardInfoComponent } from './card-info/card-info.component';
 import { TranslocoModule } from '@ngneat/transloco';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './loader/loader.component';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   imports: [
@@ -12,8 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TranslocoModule,
     ReactiveFormsModule,
   ],
-  declarations: [SearchComponent, CardComponent, CardInfoComponent],
-  exports: [SearchComponent, CardComponent, CardInfoComponent],
+  declarations: [SearchComponent, CardComponent, CardInfoComponent, LoaderComponent, ToastComponent],
+  exports: [SearchComponent, CardComponent, CardInfoComponent, LoaderComponent, ToastComponent],
 })
 
 export class ComponentsModule {}

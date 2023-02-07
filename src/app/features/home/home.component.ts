@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppFacade } from 'src/app/+state/app.facade';
-import { PokemonInfo } from 'src/app/shared/models/pokemon.model';
+import { PokemonInfo, PokemonTypes } from 'src/app/shared/models/pokemon.model';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +10,10 @@ import { PokemonInfo } from 'src/app/shared/models/pokemon.model';
 })
 export class HomeComponent {
 
+  public pokemonTypes;
   public readonly hasNext$: Observable<boolean>;
   public readonly loaded$: Observable<boolean>;
+  public readonly isFilteredList$: Observable<boolean>;
 
   public pokemonSelected: PokemonInfo;
   public pokemonList: PokemonInfo[];
@@ -33,6 +35,9 @@ export class HomeComponent {
 
     this.hasNext$ = this.appFacade.hasNextPage$;
     this.loaded$ = this.appFacade.loaded$;
+    this.isFilteredList$ = this.appFacade.isFilteredList$;
+
+    this.pokemonTypes = Object.keys(PokemonTypes);
   }
 
   selectPokemon(pokemon: PokemonInfo) {
@@ -41,6 +46,10 @@ export class HomeComponent {
 
   onScroll() {
     this.appFacade.loadPokemonList();
+  }
+
+  filterByType(type) {
+    this.appFacade.filterByType(type.target.value);
   }
 
 }

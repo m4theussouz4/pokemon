@@ -29,6 +29,13 @@
             gap: 10px;
             margin-bottom: 85px;
             margin-top: 50px;
+
+            &-title {
+                color: var(--color-primary);
+                font-size: 14px;
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
     
             &-box {
                 position: relative;

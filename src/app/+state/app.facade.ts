@@ -12,6 +12,8 @@ export class AppFacade {
   pokemonWeaknesses$ = this.store.pipe(select(AppSelectors.getpokemonWeaknesses));
   hasNextPage$ = this.store.pipe(select(AppSelectors.getHasNextPage));
   loaded$ = this.store.pipe(select(AppSelectors.getLoaded));
+  isFilteredList$ = this.store.pipe(select(AppSelectors.getIsFilteredList));
+  error$ = this.store.pipe(select(AppSelectors.getError));
 
   constructor(private readonly store: Store) {}
 
@@ -25,5 +27,9 @@ export class AppFacade {
 
   searchPokemon(searchPokemon: string) {
     this.store.dispatch(AppActions.searchPokemon({search: searchPokemon}))
+  }
+
+  filterByType(type: string) {
+    this.store.dispatch(AppActions.filterPokemonByType({pokemonType: type}))
   }
 }

@@ -40,10 +40,15 @@ export const searchPokemon = createAction(
 
 export const searchPokemonSucess = createAction(
   '[App] Search Pokemon Sucess',
-  props<{ pokemonList: PokemonInfo }>()
+  props<{ pokemonList: PokemonInfo[] }>()
 );
 
 export const searchPokemonError = createAction(
   '[App] Search Pokemon Error',
   props<{ error: any }>()
+);
+
+export const filterPokemonByType = createAction(
+  '[App] Filter Pokemon By Type',
+  props<{ pokemonType: string }>()
 );

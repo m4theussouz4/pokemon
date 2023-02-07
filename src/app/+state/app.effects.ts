@@ -69,14 +69,46 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(AppActions.searchPokemon),
       mergeMap(({ search }) => {
-        if(!search || search === '') return of({});
+        if(search === '') return of(this.store.dispatch(AppActions.searchPokemonSucess({ pokemonList: []})));
         
         return this.pokemonService.getById(search).pipe(
           map(pokemonInfo => {
             this.store.dispatch(AppActions.selectPokemon({ pokemonInfo: pokemonInfo }));
-            return AppActions.searchPokemonSucess({ pokemonList: pokemonInfo });
+            this.store.dispatch(AppActions.searchPokemonSucess({ pokemonList: [pokemonInfo]}));
           }),
-          catchError(error => of(AppActions.searchPokemonError(error)))
+          catchError(error => of(this.store.dispatch(AppActions.searchPokemonError(error))))
+        )
+      })
+    ),
+    { dispatch: false }
+  );
+
+  filterPokemon$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.filterPokemonByType),
+      mergeMap(({ pokemonType }) => {
+        if(pokemonType === '') return of(this.store.dispatch(AppActions.searchPokemonSucess({ pokemonList: []})));
+
+        this.store.dispatch(AppActions.setLoading());
+
+        return this.pokemonService.getByType(pokemonType).pipe(
+          switchMap(async data => {
+
+            let pokemonListClone = [];
+
+            for (const pokemon of data) {
+              await new Promise<void>((resolve) => {
+                this.pokemonService.getById(pokemon.name).subscribe(pokemonInfo => {
+                  pokemonListClone.push({ ...pokemon, ...pokemonInfo });
+                  resolve();
+                })
+              })
+            }
+
+            this.store.dispatch(AppActions.searchPokemonSucess({ pokemonList: pokemonListClone }));
+
+          }),
+          catchError(error => of(this.store.dispatch(AppActions.searchPokemonError(error))))
         )
       })
     ),

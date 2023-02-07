@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable } from "rxjs";
 import { PokemonList, PokemonInfo } from "../../models/pokemon.model";
 
 @Injectable({
@@ -8,7 +8,14 @@ import { PokemonList, PokemonInfo } from "../../models/pokemon.model";
 })
 export class PokemonService {
 
+    private messageSource = new BehaviorSubject("");
+    currentMessage = this.messageSource.asObservable();
+
     constructor(private http: HttpClient) {}
+
+    changeMessage(message: string) {
+        this.messageSource.next(message)
+    }
 
     getAll(offset: number, limit?: number): Observable<PokemonList> {
         return this.http.get<PokemonList>(`pokemon?offset=${offset}&limit=${limit ? limit : 100}`)
@@ -40,6 +47,12 @@ export class PokemonService {
                     weaknesses: data.damage_relations.double_damage_from.map(weakness => weakness.name)
                 }
             ))
+        )
+    }
+
+    getByType(id: number | string): Observable<any> {
+        return this.http.get<any>(`type/${id}`).pipe(
+            map(data => data.pokemon.map(pokemonData => pokemonData.pokemon))
         )
     }
 

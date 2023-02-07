@@ -5,7 +5,7 @@ export const getAppState = createFeatureSelector<AppState>(APP_FEATURE_KEY);
 
 export const getPokemonList = createSelector(
     getAppState,
-    (state: AppState) => state.pokemonList
+    (state: AppState) => state.pokemonSearchList.length ? state.pokemonSearchList : state.pokemonList
 );
 
 export const getpokemonWeaknesses = createSelector(
@@ -23,7 +23,17 @@ export const getHasNextPage = createSelector(
     (state: AppState) => state.hasNextPage
 );
 
+export const getIsFilteredList = createSelector(
+    getAppState,
+    (state: AppState) => state.pokemonSearchList.length ? true : false
+);
+
 export const getLoaded = createSelector(
     getAppState,
     (state: AppState) => state.loaded
+);
+
+export const getError = createSelector(
+    getAppState,
+    (state: AppState) => state.error
 );
