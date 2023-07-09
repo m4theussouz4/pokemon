@@ -1,7 +1,12 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppFacade } from 'src/app/+state/app.facade';
-import { PokemonInfo, PokemonStatisticColors, PokemonStatisticLabels, PokemonTypesColors } from '../../models/pokemon.model';
+import { AppFacade } from '../../../+state/app.facade';
+import {
+  PokemonInfo,
+  PokemonStatisticColors,
+  PokemonStatisticLabels,
+  PokemonTypesColors
+} from '../../models/pokemon.model';
 
 @Component({
   selector: 'app-card-info',

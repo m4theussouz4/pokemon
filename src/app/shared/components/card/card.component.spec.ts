@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CardComponent } from './card.component';
+import { pokemonCardDataMock } from '../../mocks/pokemon.mock';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -11,9 +11,12 @@ describe('CardComponent', () => {
       declarations: [ CardComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
+    component.cardData = pokemonCardDataMock;
     fixture.detectChanges();
   });
 

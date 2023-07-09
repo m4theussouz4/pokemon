@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CardInfoComponent } from './card-info.component';
+import { AppFacade } from '../../../+state/app.facade';
+import { of } from 'rxjs';
 
 describe('CardInfoComponent', () => {
   let component: CardInfoComponent;
@@ -8,7 +9,15 @@ describe('CardInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardInfoComponent ]
+      declarations: [ CardInfoComponent ],
+      providers: [
+        {
+          provide: AppFacade,
+          useValue: {
+            pokemonWeaknesses$: of({})
+          }
+        }
+      ],
     })
     .compileComponents();
 

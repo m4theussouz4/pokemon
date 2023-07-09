@@ -13,8 +13,6 @@ export class ToastComponent {
 
   constructor(private pokemonService: PokemonService){
     this.pokemonService.currentMessage.subscribe(message => {
-      console.log(message);
-      
       if(message) {
         this.message = message
         this.show();

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AppFacade } from 'src/app/+state/app.facade';
+import { AppFacade } from '../../../+state/app.facade';
 
 @Component({
   selector: 'poke-search',

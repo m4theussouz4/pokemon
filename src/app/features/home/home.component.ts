@@ -1,8 +1,8 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppFacade } from 'src/app/+state/app.facade';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { PokemonInfo, PokemonTypes } from 'src/app/shared/models/pokemon.model';
+import { AppFacade } from '../../+state/app.facade';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { PokemonInfo, PokemonTypes } from '../../shared/models/pokemon.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

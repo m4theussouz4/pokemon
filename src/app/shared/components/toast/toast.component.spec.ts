@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastComponent } from './toast.component';
+import { PokemonService } from '../../services/pokemon/pokemon.service';
 
 describe('ToastComponent', () => {
   let component: ToastComponent;
@@ -8,7 +9,13 @@ describe('ToastComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToastComponent ]
+      imports: [
+        HttpClientTestingModule
+      ],
+      declarations: [ ToastComponent ],
+      providers: [
+        PokemonService
+      ]
     })
     .compileComponents();
 

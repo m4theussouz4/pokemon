@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ScannedActionsSubject } from '@ngrx/store';
 import { filter } from 'rxjs';
-import { searchPokemonError } from 'src/app/+state/app.actions';
-import { AppFacade } from 'src/app/+state/app.facade';
-import { PokemonService } from 'src/app/shared/services/pokemon/pokemon.service';
+import { searchPokemonError } from '../../+state/app.actions';
+import { AppFacade } from '../../+state/app.facade';
+import { PokemonService } from '../../shared/services/pokemon/pokemon.service';
 
 @Component({
   selector: 'app-main-container',
@@ -12,7 +12,11 @@ import { PokemonService } from 'src/app/shared/services/pokemon/pokemon.service'
 })
 export class MainContainerComponent {
 
-  constructor(private appFacade: AppFacade, private pokemonService: PokemonService, private actions$: ScannedActionsSubject) {
+  constructor(
+    private appFacade: AppFacade,
+    private pokemonService: PokemonService,
+    private actions$: ScannedActionsSubject
+  ) {
     this.appFacade.loadPokemonList();
 
     this.actions$.pipe(
