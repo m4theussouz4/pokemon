@@ -78,6 +78,13 @@
           "options": {
             "browserTarget": "pokedex:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "jestConfig": ["apps/admin/jest.config.js"],
+            "passWithNoTests": true
+          }
         }
       }
     }

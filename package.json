@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-builders/jest": "^16.0.0",
     "@angular/animations": "^15.0.0",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
@@ -51,6 +52,7 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
+    "collectCoverage": true,
     "setupFilesAfterEnv": [
       "<rootDir>/src/setup.jest.ts"
     ],
