@@ -3,15 +3,6 @@
 <div class="home-container">
     <div class="pokemon-list">
 
-        <!-- <div class="pokemon-list-sort-by">
-            <select class="form-select">
-                <option select>numb ascending</option>
-                <option value="1">numb descend</option>
-                <option value="2">name ascending</option>
-                <option value="3">name descend</option>
-            </select>
-        </div> -->
-
         <div class="pokemon-list-filter">
             <div>
                 <div class="pokemon-list-filter-title">Type</div>
@@ -41,10 +32,20 @@
             />
         </div>
 
-        <app-loader *ngIf="!(loaded$ | async)" [isPageLoader]="(isFilteredList$ | async)"/>
+        <app-loader *ngIf="!(loaded$ | async)" [isPageLoader]="(isFilteredList$ | async)" />
 
     </div>
-    <app-card-info [pokemonSelected]="pokemonSelected" [totalStats]="totalStats"/>
+    <app-card-info
+        *ngIf="!isMobile"
+        [pokemonSelected]="pokemonSelected"
+        [totalStats]="totalStats"
+    />
     
 </div>
 
+<poke-modal #pokeModal>
+    <app-card-info
+        [pokemonSelected]="pokemonSelected"
+        [totalStats]="totalStats"
+    />
+</poke-modal>
